@@ -1,4 +1,6 @@
-idf_component_register(SRCS "I2Cdev.cpp"
-                       INCLUDE_DIRS "."
-					   PRIV_REQUIRES driver
-)
+set(srcs
+    "I2Cdev.cpp")
+
+idf_component_register(SRCS "${srcs}"
+                       INCLUDE_DIRS "include"
+					   PRIV_REQUIRES driver)
