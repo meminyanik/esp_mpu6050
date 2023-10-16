@@ -38,6 +38,9 @@ void task_initI2C(void *ignore) {
 }
 
 void task_display(void*){
+	/* Set the log level */
+    static const char *TAG = "MPU6050_TASK";
+
 	MPU6050 mpu = MPU6050();
 	mpu.initialize();
 	mpu.dmpInitialize();
@@ -74,9 +77,7 @@ void task_display(void*){
 	 		mpu.dmpGetQuaternion(&q, fifoBuffer);
 			mpu.dmpGetGravity(&gravity, &q);
 			mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
-			printf("YAW: %3.1f, ", ypr[0] * 180/M_PI);
-			printf("PITCH: %3.1f, ", ypr[1] * 180/M_PI);
-			printf("ROLL: %3.1f \n", ypr[2] * 180/M_PI);
+			ESP_LOGI(TAG, "YAW: %3.1f, PITCH: %3.1f, ROLL: %3.1f", ypr[0] * 180/M_PI, ypr[1] * 180/M_PI, ypr[2] * 180/M_PI);
 	    }
 
 	    //Best result is to match with DMP refresh rate
